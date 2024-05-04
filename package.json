@@ -1,0 +1,24 @@
+{
+  "name": "skedge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Joe <laulettaj@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-graphql": "^0.12.0",
+    "express-session": "^1.18.0",
+    "graphql": "^16.8.1",
+    "mongoose": "^8.3.3",
+    "nodemon": "^3.1.0",
+    "uuid": "^9.0.1"
+  },
+  "scripts": {
+    "dev": "nodemon server.js"
+  }
+}
