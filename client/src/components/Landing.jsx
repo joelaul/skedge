@@ -2,7 +2,18 @@ import { React, useState } from 'react';
 import logo from '/pfp/cameron.jpg'
 import styled from 'styled-components';
 
-const styledTest = styled.div``;
+const Hero = styled.div`
+  // background-image: url("../../public/hero.png");
+  background-size: 700%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    max-width: 500px;
+  }
+`;
 
 const Home = () => { 
   const [formData, setFormData] = useState(
@@ -39,13 +50,17 @@ const Home = () => {
 
   return (
     <>
-      <div className="logo">
-        <a href="http://localhost:5173">
-          <img src={logo} className="logo"/>
-        </a>
-      </div>
+      <Hero>
+        <h1>
+          <span >Skedge</span> - a social productivity app.
+          </h1>
 
-      <h1>Skedge - a social productivity app</h1>
+        <div className="logo">
+          <a href="http://localhost:5173">
+            <img src={logo} className="logo"/>
+          </a>
+        </div>
+      </Hero>
 
       <form noValidate>
 
@@ -114,9 +129,9 @@ const Home = () => {
 
       </div>
 
-      <p className="help">
+     {/*  <p className="help">
           Stuck on filling out the form? Click on the Skedge logo for help
-      </p>
+      </p> */}
     </>
   )
 }

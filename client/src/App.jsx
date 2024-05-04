@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 
 // GLOBAL STYLES
 
@@ -7,7 +8,13 @@ import "./globals.css";
 
 // COMPONENTS
 
-import Home from "./components/Home";
+// Layout
+
+import Nav from "./components/Nav"
+
+// Routes
+
+import Landing from "./components/Landing";
 
 const App = () => {
 
@@ -37,7 +44,10 @@ const App = () => {
    
   return (
     <>
-      <Home />
+      <BrowserRouter>
+        <Nav />
+        <Landing />
+      </BrowserRouter>
     </>
   )
 }
