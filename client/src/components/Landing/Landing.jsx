@@ -1,21 +1,28 @@
 import { React, useState } from 'react';
-import logo from '/pfp/cameron.jpg'
 import styled from 'styled-components';
+
+import { FORM_TOP_ITEMS } from './constants';
+
+import logo from '/pfp/cameron.jpg'
 
 const Hero = styled.div`
   // background-image: url("../../public/hero.png");
-  background-size: 700%;
 
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
 
   h1 {
     max-width: 500px;
+
+    span {
+      color: #DDD
+    }
   }
 `;
 
-const Home = () => { 
+const Landing = () => { 
   const [formData, setFormData] = useState(
     {
       goals: "",
@@ -52,8 +59,8 @@ const Home = () => {
     <>
       <Hero>
         <h1>
-          <span >Skedge</span> - a social productivity app.
-          </h1>
+          <span>Skedge</span> - a social productivity app.
+        </h1>
 
         <div className="logo">
           <a href="http://localhost:5173">
@@ -65,46 +72,22 @@ const Home = () => {
       <form noValidate>
 
         <div className="form top">
-          <div>
-            <label htmlFor="goals">Goals: </label>
-            <input 
-              name="goals"
-              placeholder="I want to pop off"
-              value={formData.goals}
-              onChange={handleChange}
+
+          {FORM_TOP_ITEMS.map(({ title, camel, placeholder }) => (
+            <div 
+              key={camel}
             >
-            </input>
-          </div>
+                <label>{`${title}: ` }</label>
+                <input
+                  name={camel}
+                  placeholder={placeholder}
+                  value={formData[`${camel}`]}
+                  onChange={handleChange}
+                >
+                </input>
+            </div>
+          ))}
           
-          <div>
-            <label>Time constraints: </label>
-            <input 
-              name="timeConstraints"
-              placeholder="I have a part-time job"
-              value={formData.timeConstraints}
-              onChange={handleChange}
-            ></input>
-          </div>
-
-          <div>
-            <label>Work style: </label>
-            <input 
-              name="workStyle"
-              placeholder="I'm detail-oriented"            
-              value={formData.workStyle}
-              onChange={handleChange}
-            ></input>
-          </div>
-
-          <div>
-            <label>Personality: </label>
-            <input 
-              name="personality"
-              placeholder="I'm sexually free"            
-              value={formData.personality}
-              onChange={handleChange}
-            ></input>
-          </div>
         </div>
 
         <div className="form bottom">
@@ -136,4 +119,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Landing

@@ -1,21 +1,31 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// GLOBAL STYLES
+/* REDUX
+
+import Provider from "react-redux";
+import store from "./store";
+
+*/
+
+// STYLES
 
 import "./globals.css";
 
 // COMPONENTS
 
 // Layout
-
-import Nav from "./components/Nav"
+import Nav from "./components/Nav/Nav"
 
 // Routes
+import Landing from "./components/Landing/Landing";
+import Explore from "./components/Explore";
+import Blog from "./components/Blog"
+import Login from "./components/Login";
+import Register from "./components/Register";
 
-import Landing from "./components/Landing";
-
+// Main
 const App = () => {
 
   /* 
@@ -44,10 +54,18 @@ const App = () => {
    
   return (
     <>
-      <BrowserRouter>
+    {/* <Provider> */}
         <Nav />
-        <Landing />
-      </BrowserRouter>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Landing />}></Route>
+            <Route path="/explore" element={<Explore />}></Route>
+            <Route path="/blog" element={<Blog />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/register" element={<Register />}></Route>
+          </Routes>
+        </Router>
+      {/* </Provider> */}
     </>
   )
 }
