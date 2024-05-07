@@ -2,7 +2,9 @@
 
 const whitelist = [
     'http://localhost:5173',
-    'http://localhost:8000' 
+    'http://localhost:8000',
+    'https://skedge.onrender.com',
+    'https://skedge-api.onrender.com' 
 ];
 
 const corsOptions = {
