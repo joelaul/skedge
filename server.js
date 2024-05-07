@@ -1,143 +1,69 @@
-require("dotenv").config();
 const express = require("express");
-const app = express();
 const path = require("path");
-
-const cors = require("cors");
-const corsOptions = require("./config/corsOptions");
-const { logger } = require("./middleware/logEvents");
-const errorHandler = require("./middleware/errorHandler");
-
-const { graphqlHTTP } = require("express-graphql");
-const {
-  GraphQLObjectType,
-  GraphQLSchema,
-  GraphQLString,
-  GraphQLInt,
-  GraphQLNonNull,
-  GraphQLList,
-} = require("graphql");
-
-const PORT = process.env.PORT || 8000;
-
-// #######################################
-//               CONNECT DB
-// #######################################
-
-// launch database + allow use of relevant db models in gql resolvers
+const cors = require("cors")
 
 const mongoose = require("mongoose");
-const Entry = require("./models/Entry");
+const passport = require("passport");
+require("dotenv").config();
+
+const corsOptions = require("./config/corsOptions");
+const { logger } = require("./middleware/logEvents");
+
+const app = express();
+
+// DB
 
 mongoose.set("strictQuery", true);
 const connect = async () => {
-  // connect to TattleLog.entries collection
   await mongoose.connect(process.env.DATABASE_URI, {
     useNewUrlParser: true,
   });
 };
 connect();
 
-// #######################################
-//               CONNECT GQL
-// #######################################
+// MIDDLEWARE
 
-// resolvers need only be provided at root level; gql navigates from there
-const RootQueryType = new GraphQLObjectType({
-  name: "Query",
-  description: "root query",
-  fields: () => ({
-    entry: {
-      type: EntryType,
-      description: "one tattle log entry",
-      args: {
-        id: { type: GraphQLInt },
-      },
-      resolve: async (parent, args) =>
-        await Entry.findOne({ id: args.id }).exec(),
-    },
-    entries: {
-      type: new GraphQLList(EntryType),
-      description: "a list of all tattle log entries",
-      resolve: async () => await Entry.find().sort({ id: 1 }),
-    },
-  }),
-});
+// app.use(passport.initialize());
+// require("./config/passport")(passport);
 
-const EntryType = new GraphQLObjectType({
-  name: "Entry",
-  description: "one tattle log entry",
-  fields: () => ({
-    id: { type: new GraphQLNonNull(GraphQLInt) },
-    description: { type: new GraphQLNonNull(GraphQLString) },
-    image: { type: new GraphQLNonNull(GraphQLString) },
-    name: { type: new GraphQLNonNull(GraphQLString) },
-    stats: { type: new GraphQLNonNull(StatsType) },
-  }),
-});
-
-const StatsType = new GraphQLObjectType({
-  name: "Stats",
-  description: "contains a tattle log entry's stats",
-  fields: () => ({
-    atk: { type: new GraphQLNonNull(GraphQLInt) },
-    def: { type: new GraphQLNonNull(GraphQLInt) },
-    hp: { type: new GraphQLNonNull(GraphQLInt) },
-  }),
-});
-
-const schema = new GraphQLSchema({
-  query: RootQueryType,
-});
-
-// #######################################
-//               MIDDLEWARE
-// #######################################
-
-app.use(logger);
-app.use(cors(corsOptions));
-app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cors(corsOptions));
+app.use(logger);
 
-// #######################################
-//                ROUTES
-// #######################################
+// SERVE FRONTEND
 
-// serve static files
-app.use(express.static(path.join(__dirname, "/client/dist")));
+// What does this do? How does a monorepo work?
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/dist"));
 
-// REST API - Entries
-app.use("/api/entries", require("./routes/entries"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
+  });
+}
 
-// GQL API - Entries
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: schema,
-    graphiql: true,
-  })
-);
+// ROUTES
 
 app.get("/", (req, res) => {
   res.status(200).send({ message: "GET / is healthy" });
 });
-
 app.post("/", (req, res) => {
   console.log(req.body)
 });
 
-app.use(errorHandler);
+app.use("/api/chats", require("./routes/chats"));
+app.use("/api/profiles", require("./routes/profiles"));
+app.use("/api/schedules", require("./routes/schedules"));
+app.use("/api/users", require("./routes/users"));
 
-// #######################################
-// ONLY RUN SERVER IF CONNECTED TO MONGODB
-// #######################################
+// INIT
+
+const port = process.env.PORT || 8000;
 
 mongoose.connection.once("open", () => {
+  console.clear();
   console.log("Connected to MongoDB");
-  app.listen(PORT, () =>
-
-    console.log(
-      `Server running on port ${PORT}\n--------------------------`
-    )
+  app.listen(port, () =>
+    console.log(`Server running on port ${port}`)
   );
 });

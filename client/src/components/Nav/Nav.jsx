@@ -15,10 +15,10 @@ const StyledNav = styled.div`
   margin: 0 0 30px 0;
   padding: 10px;
 
-  background: #00CC88;
+  background: #00cc88;
 
   a {
-    color: white;
+    color: #ddd;
     cursor: pointer;
     transition: color 200ms;
 
@@ -36,18 +36,24 @@ const StyledNav = styled.div`
     height: 40px;
     top: 4px;
     left: 50px;
-    border-radius: 50%
+    border-radius: 50%;
+
+      a {
+        &:active {
+          border: 10px solid #000;
+        }
+      }
   }
 
   .nav-items {
     display: flex;
     align-items: center;
-  }
 
-  .nav-item {
-    padding: 0 10px 0 5px;
+    .nav-item {
+      padding: 0 10px 0 5px;
+    }
+  
   }
-
   .current > a {
     padding: 5px;
     color: white;

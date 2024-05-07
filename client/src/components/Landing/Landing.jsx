@@ -103,7 +103,7 @@ const Landing = () => {
       <div className="cta">
 
           <button onClick={handleGenerate}>
-            Get Started
+            🚀 Get Started
           </button>
 
           <p> 

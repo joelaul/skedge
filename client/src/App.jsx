@@ -1,13 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-/* REDUX
-
-import Provider from "react-redux";
-import store from "./store";
-
-*/
+// import Provider from "react-redux";
+// import store from "./store";
 
 // STYLES
 
@@ -16,7 +12,8 @@ import "./globals.css";
 // COMPONENTS
 
 // Layout
-import Nav from "./components/Nav/Nav"
+import Nav from "./components/Nav/Nav";
+import Footer from "./components/Footer";
 
 // Routes
 import Landing from "./components/Landing/Landing";
@@ -32,8 +29,8 @@ const App = () => {
 
     CORE FUNCTIONALITY:
 
-      Non-user -> Get Started route
-      User -> Dashboard route
+      Non-user -> Landing
+      User -> Dashboard
 
       Set form data state
       
@@ -65,6 +62,7 @@ const App = () => {
             <Route path="/register" element={<Register />}></Route>
           </Routes>
         </Router>
+        <Footer />
       {/* </Provider> */}
     </>
   )
