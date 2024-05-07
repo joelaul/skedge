@@ -44,7 +44,9 @@ const Landing = () => {
   const handleGenerate = async () => {
     console.log(formData);
 
-    const res = await fetch("http://localhost:8000", 
+    const url = process.env.NODE_ENV == 'production' ? "https://skedge-api.onrender.com" : "http://localhost:8000";
+
+    const res = await fetch(url, 
     { 
       method: "POST", 
       headers: {

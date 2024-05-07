@@ -31,9 +31,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors(corsOptions));
 app.use(logger);
 
-// SERVE FRONTEND
+// ROUTES
 
-// What does this do? How does a monorepo work?
+app.get("/", (req, res) => {
+  res.status(200).send({ message: "GET / is healthy" });
+});
+
+/* What does this do? How does a monorepo work?
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/dist"));
 
@@ -42,11 +47,8 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// ROUTES
+*/
 
-app.get("/", (req, res) => {
-  res.status(200).send({ message: "GET / is healthy" });
-});
 app.post("/", (req, res) => {
   console.log(req.body)
 });

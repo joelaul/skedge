@@ -4,6 +4,10 @@
   "main": "index.js",
   "author": "Joe <laulettaj@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "prod": "node server.js"
+  },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "concurrently": "^8.2.2",
@@ -16,11 +20,10 @@
     "express-session": "^1.18.0",
     "graphql": "^16.8.1",
     "mongoose": "^8.3.3",
-    "nodemon": "^3.1.0",
     "passport": "^0.7.0",
     "uuid": "^9.0.1"
   },
-  "scripts": {
-    "dev": "nodemon server.js"
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }
