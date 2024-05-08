@@ -7,7 +7,7 @@ import logo from '/pfp/cameron.jpg'
 
 // STYLES
 
-const Hero = styled.div`
+const StyledHero = styled.div`
   // background-image: url("../../public/hero.png");
 
   height: 300px;
@@ -59,7 +59,7 @@ const Landing = () => {
 
   return (
     <>
-      <Hero>
+      <StyledHero>
         <h1>
           <span>Skedge</span> - a social productivity app.
         </h1>
@@ -69,7 +69,7 @@ const Landing = () => {
             <img src={logo} className="logo"/>
           </a>
         </div>
-      </Hero>
+      </StyledHero>
 
       <form noValidate>
 
