@@ -1,9 +1,11 @@
 import { React, useState } from 'react';
 import styled from 'styled-components';
 
-import { FORM_TOP_ITEMS } from './constants';
+import { FORM_TOP_ITEMS, clientUrl, serverUrl } from './constants';
 
 import logo from '/pfp/cameron.jpg'
+
+// STYLES
 
 const Hero = styled.div`
   // background-image: url("../../public/hero.png");
@@ -22,7 +24,7 @@ const Hero = styled.div`
   }
 `;
 
-const Landing = () => { 
+const Landing = () => {
   const [formData, setFormData] = useState(
     {
       goals: "",
@@ -44,9 +46,7 @@ const Landing = () => {
   const handleGenerate = async () => {
     console.log(formData);
 
-    const url = process.env.NODE_ENV == 'production' ? "https://skedge-api.onrender.com" : "http://localhost:8000";
-
-    const res = await fetch(url, 
+    const res = await fetch(serverUrl, 
     { 
       method: "POST", 
       headers: {
@@ -65,7 +65,7 @@ const Landing = () => {
         </h1>
 
         <div className="logo">
-          <a href="http://localhost:5173">
+          <a href={clientUrl}>
             <img src={logo} className="logo"/>
           </a>
         </div>
@@ -95,7 +95,6 @@ const Landing = () => {
         <div className="form bottom">
           <label>Email: </label>
           <input type="email"></input>
-
           <label> Password: </label>
           <input type="password"></input>
         </div>

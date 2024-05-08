@@ -37,18 +37,6 @@ app.get("/", (req, res) => {
   res.status(200).send({ message: "GET / is healthy" });
 });
 
-/* What does this do? How does a monorepo work?
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/dist"));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
-  });
-}
-
-*/
-
 app.post("/", (req, res) => {
   console.log(req.body)
 });

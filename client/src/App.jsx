@@ -22,7 +22,6 @@ import Blog from "./components/Blog"
 import Login from "./components/Login";
 import Register from "./components/Register";
 
-// Main
 const App = () => {
 
   /* 
