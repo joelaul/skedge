@@ -1,7 +1,8 @@
 import { React, useState } from 'react';
 import styled from 'styled-components';
 
-import { FORM_TOP_ITEMS, clientUrl, serverUrl } from './constants';
+import { FORM_TOP_ITEMS } from './constants';
+import { clientUrl, serverUrl } from '../../utils';
 
 import logo from '/pfp/cameron.jpg'
 

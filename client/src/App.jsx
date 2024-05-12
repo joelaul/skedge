@@ -20,15 +20,14 @@ import Landing from "./components/Landing/Landing";
 import Explore from "./components/Explore";
 import Blog from "./components/Blog"
 import Login from "./components/Login";
-import Register from "./components/Register";
+import Register from "./components/Register/Register";
 
 const App = () => {
 
   /* 
-
     CORE FUNCTIONALITY:
 
-      Non-user -> Landing
+      Visitor -> Landing
       User -> Dashboard
 
       Set form data state
@@ -45,12 +44,11 @@ const App = () => {
       Schedule - [however we define the schedule]
       Chat - Users (User[]), Content (String[])
       Profile - ref->User, ref-Schedule, Partners (User[]), Chats (Chat[])
-
   */
    
   return (
     <>
-    {/* <Provider> */}
+    {/* <Provider store={store}> */}
         <Nav />
         <Router>
           <Routes>

@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 require("dotenv").config();
 
-const corsOptions = require("./config/corsOptions");
+const corsOpts = require("./config/corsOpts");
 const { logger } = require("./middleware/logEvents");
 
 const app = express();
@@ -23,28 +23,30 @@ connect();
 
 // MIDDLEWARE
 
-// app.use(passport.initialize());
-// require("./config/passport")(passport);
+/*
+  app.use(passport.initialize());
+  require("./config/passport")(passport);
+*/
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors(corsOptions));
+app.use(cors(corsOpts));
 app.use(logger);
 
 // ROUTES
 
-app.get("/", (req, res) => {
-  res.status(200).send({ message: "GET / is healthy" });
+app.get("/test", (req, res) => {
+  res.status(200).send({ message: "/ route works" });
 });
 
 app.post("/", (req, res) => {
   console.log(req.body)
 });
 
-app.use("/api/chats", require("./routes/chats"));
-app.use("/api/profiles", require("./routes/profiles"));
-app.use("/api/schedules", require("./routes/schedules"));
-app.use("/api/users", require("./routes/users"));
+app.use("/chats", require("./routes/chats"));
+app.use("/profiles", require("./routes/profiles"));
+app.use("/schedules", require("./routes/schedules"));
+app.use("/users", require("./routes/users"));
 
 // INIT
 
