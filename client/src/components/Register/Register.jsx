@@ -1,11 +1,13 @@
 import { React, useState } from 'react';
 import styled from 'styled-components';
 
-// import { connect } from 'react-redux';
-// import { registerUser } from "../../actions/authActions";
-
 import { FORM_ITEMS } from './constants'
 import { serverUrl } from '../../utils';
+
+import RegisterNotice from './RegisterNotice';
+
+// import { connect } from 'react-redux';
+// import { registerUser } from "../../actions/authActions";
 
 // STYLES
 
@@ -22,6 +24,14 @@ const Register = () => {
     }
   );
 
+  const [empty, setEmpty] = useState(true);
+
+  const [errors, setErrors] = useState([]);
+
+  const isEmpty = (obj) => {
+    return Object.values(obj).every(value => value === "");
+  }
+
   const handleChange = (e) => {
     setFormData(
       {
@@ -30,14 +40,16 @@ const Register = () => {
       }
     );
   };
-
+  
   const handleKeyPress = (e) => {
     if (e.key == 'Enter') handleRegister();
-  }
+  };
   
+  // Move to ../../actions/authActions.js
   const handleRegister = async () => {
-    let res = null; // Initialize to a default value
-  
+    setEmpty(isEmpty(formData));
+
+    let res = null;  
     try {
       res = await fetch(`${serverUrl}/users/register`, {
         method: "POST",
@@ -46,28 +58,34 @@ const Register = () => {
         },
         body: JSON.stringify(formData)
       });
-  
+      const data = await res.json();
+
       if (!res.ok) {
-        console.log(`HTTP response code: ${res.status}`);
-        // Handle non-OK response here if needed
+        setErrors([...Object.values(data)]);
+        console.log(`Server error. HTTP status code: ${res.status}`);
       } else {
-        // Extract and log specific data from the response if needed
-        const responseData = await res.json();
-        console.log(responseData);
+        setErrors([]);
       }
     } catch (error) {
-      console.error('Error in fetch', error);
-      // Handle fetch error
+      console.error('Fetch unsuccessful.', error);
     }
   
-    // Ensure that the following line is uncommented and properly integrated
     // this.props.registerUser(formData, this.props.history);
   };
 
   return (
     <>
-      <form noValidate>
 
+      <h1>Join Skedge</h1>
+
+      <RegisterNotice 
+        errors={errors}
+        empty={empty}
+      >
+      </RegisterNotice>
+
+      <form noValidate>
+      
         <div className="form">
           {FORM_ITEMS.map(({ title, camel, placeholder }) => (
             <div 
