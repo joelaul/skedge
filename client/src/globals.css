@@ -51,9 +51,15 @@ button:focus-visible {
 }
 
 h1 {
-  font-size: 3.2em;
+
+  font-size: 3em;
   line-height: 1.1;
   color: #00CC88
+}
+
+input {
+  margin: 5px;
+  padding: 2px 0 2px 7px;
 }
 
 /* CLASS */

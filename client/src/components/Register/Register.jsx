@@ -6,9 +6,6 @@ import { serverUrl } from '../../utils';
 
 import RegisterNotice from './RegisterNotice';
 
-// import { connect } from 'react-redux';
-// import { registerUser } from "../../actions/authActions";
-
 // STYLES
 
 const StyledRegister = styled.div``;
@@ -23,9 +20,7 @@ const Register = () => {
       password: ""
     }
   );
-
   const [empty, setEmpty] = useState(true);
-
   const [errors, setErrors] = useState([]);
 
   const isEmpty = (obj) => {
@@ -122,9 +117,11 @@ const Register = () => {
 
 export default Register
 
-// REDUX
+/* REDUX
 
-/* 
+// import { connect } from 'react-redux';
+// import { registerUser } from "../../actions/authActions";
+
 const mapStateToProps = state => ({
   authReducer: state.authReducer,
   errorReducer: state.errorReducer

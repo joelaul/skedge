@@ -19,7 +19,7 @@ import Footer from "./components/Footer";
 import Landing from "./components/Landing/Landing";
 import Explore from "./components/Explore";
 import Blog from "./components/Blog"
-import Login from "./components/Login";
+import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 
 const App = () => {
@@ -29,8 +29,6 @@ const App = () => {
 
       Visitor -> Landing
       User -> Dashboard
-
-      Set form data state
       
       Action - generateSchedule()
         fetch() POST form data to API -> AI services -> generate schedule text -> format + assign weights for recommendation

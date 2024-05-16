@@ -6,8 +6,8 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 require("dotenv").config();
 
-const corsOpts = require("./config/corsOpts");
-const { logger } = require("./middleware/logEvents");
+const opts = require("./config/cors");
+const { logger } = require("./middleware/logger");
 
 const app = express();
 
@@ -23,14 +23,12 @@ connect();
 
 // MIDDLEWARE
 
-/*
-  app.use(passport.initialize());
-  require("./config/passport")(passport);
-*/
+app.use(passport.initialize());
+require("./config/passport")(passport);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors(corsOpts));
+app.use(cors(opts));
 app.use(logger);
 
 // ROUTES

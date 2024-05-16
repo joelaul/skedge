@@ -5,7 +5,7 @@ const whitelist = [
     'https://skedge.onrender.com'
 ];
 
-const corsOptions = {
+const opts = {
     origin: (origin, callback) => {
        if (whitelist.indexOf(origin) !== -1 || !origin) {
         callback(null, true)
@@ -16,4 +16,4 @@ const corsOptions = {
     optionsSuccessStatus: 200
 }
 
-module.exports = corsOptions;
+module.exports = opts;
