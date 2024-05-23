@@ -42,6 +42,7 @@ app.post("/", (req, res) => {
 });
 
 app.use("/chats", require("./routes/chats"));
+app.use("/matches", require("./routes/matches"));
 app.use("/profiles", require("./routes/profiles"));
 app.use("/schedules", require("./routes/schedules"));
 app.use("/users", require("./routes/users"));

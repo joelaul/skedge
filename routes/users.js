@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
@@ -29,9 +30,9 @@ router.post("/register", async (req, res) => {
 
   try {
     // Check if user already exists
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ name: req.body.name });
     if (user) {
-      errors.email = "Email already exists";
+      errors.name = "User already exists";
       return res.status(400).json(errors);
     }
 
@@ -63,9 +64,9 @@ router.post("/login", async (req, res) => {
     res.status(400).json(errors);
   } else {
     // Check if user exists
-    const email = req.body.email;
+    const name = req.body.name;
     const password = req.body.password;
-    let user = await User.findOne({ email });
+    let user = await User.findOne({ name });
 
     if (user) {
       // Check if password is correct; if so, generate JWT and send to client
@@ -97,12 +98,11 @@ router.post("/login", async (req, res) => {
 });
 
 // Check current user based on JWT
-router.get(
-  "/current",
+router.get("/me",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     res.json({
-      id: req.user._id,
+      id: req.user.id,
       name: req.user.name,
       email: req.user.email,
     });

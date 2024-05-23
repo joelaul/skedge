@@ -1,8 +1,6 @@
 /* TOP LEVEL */
 
 :root {
-  
-  margin: 0 auto;
   text-align: center;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -12,15 +10,14 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background: #242424;
-
 }
 
 body {
-  margin: 0;
-  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
-/* ELEMENT */
+/* ELEMENTS */
 
 a {
   font-weight: 500;
@@ -51,7 +48,6 @@ button:focus-visible {
 }
 
 h1 {
-
   font-size: 3em;
   line-height: 1.1;
   color: #00CC88
@@ -62,9 +58,9 @@ input {
   padding: 2px 0 2px 7px;
 }
 
-/* CLASS */
+/* CLASSES */
 
-.logo {
+.cameron {
   height: 14em;
   will-change: filter;
   transition: filter 300ms;
@@ -100,7 +96,7 @@ input {
   }
 }
 
-/* RESPONSIVE DESIGN */
+/* RESPONSIVE */
 
 @media (prefers-color-scheme: light) {
   :root {
