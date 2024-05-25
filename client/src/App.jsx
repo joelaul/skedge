@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 import { Provider, useDispatch } from "react-redux";
 import { store } from './ctx/store';
 
-import { jwtDecode } from 'jwt-decode';
+import { setCurrentUser } from './ctx/features/auth/authSlice'
 
 // STYLES
 
@@ -31,6 +32,7 @@ import Chat from "./components/matches/Chat"
 
 // Profiles
 import Profile from "./components/profiles/Profile";
+import ProfileEdit from "./components/profiles/ProfileEdit";
 import Explore from "./components/profiles/Explore";
 
 // Org
@@ -45,7 +47,7 @@ const App = () => {
     const decoded = jwtDecode(localStorage.jwt);
     dispatch(setCurrentUser(decoded));
   }
-   
+
   return (
     <>
       <Router>
@@ -56,6 +58,7 @@ const App = () => {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/edit" element={<ProfileEdit />}></Route>
           <Route path="/explore" element={<Explore />}></Route>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/board" element={<Board />}></Route>
@@ -76,6 +79,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </ Provider>
   </React.StrictMode>
 )
+
+// TODO(joe): REPLICATE SANS-REDUX CONDITIONAL NOTICE RENDERING / ERROR HANDLING
+// TODO(joe): WRONG PASSWORD STILL CAUSES REDIRECT TO /dashboard
 
 /* NOTES
 

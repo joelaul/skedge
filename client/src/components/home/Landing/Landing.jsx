@@ -1,4 +1,7 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import styled from 'styled-components';
 
 import { FORM_TOP_ITEMS } from './constants';
@@ -26,6 +29,7 @@ const StyledHero = styled.div`
 `;
 
 const Landing = () => {
+  const { user } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState(
     {
       goals: "",
@@ -34,6 +38,12 @@ const Landing = () => {
       personality: ""
     }
   );
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) navigate('/dashboard');
+  }, [user])
 
   const handleChange = (e) => {
     setFormData(
@@ -113,10 +123,6 @@ const Landing = () => {
           </p>
 
       </div>
-
-     {/*  <p className="help">
-          Stuck on filling out the form? Click on the Skedge logo for help
-      </p> */}
     </>
   )
 }

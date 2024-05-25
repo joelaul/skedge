@@ -50,7 +50,6 @@ router.post("/register", async (req, res) => {
     res.json(savedUser);
   } catch (err) {
     // Handle server-side error
-      console.error("Caught an error:", err);
       return res.status(500).json({ error: "Internal server error" });
   }
 });

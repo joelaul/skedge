@@ -1,10 +1,13 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 import styled from 'styled-components';
 
-import { FORM_ITEMS } from './constants'
-import { serverUrl } from '../../../constants';
 import { isEmpty } from '../../../lib/util/isEmpty';
 
+import { FORM_ITEMS } from './constants'
+import { registerUser } from "../../../ctx/features/auth/authActions";
 import RegisterNotice from './RegisterNotice';
 
 // STYLES
@@ -13,7 +16,16 @@ const StyledRegister = styled.div``;
 
 // COMPONENT
 
-const Register = () => {
+const Register = () => {  
+  const { status } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (status == 'succeeded')
+    navigate('/dashboard');
+  }, [status]);
+
   const [formData, setFormData] = useState(
     {
       name: "",
@@ -33,41 +45,18 @@ const Register = () => {
     );
   };
   
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e) =>    {
     if (e.key == 'Enter') handleRegister();
   };
   
-  // TODO(joe): Move to ctx/features/auth/authActions.js
   const handleRegister = async () => {
-    setEmpty(isEmpty(formData));
-
-    let res = null;  
-    try {
-      res = await fetch(`${serverUrl}/users/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
-      const data = await res.json();
-
-      if (!res.ok) {
-        setErrors([...Object.values(data)]);
-        console.log(`Server error. HTTP status code: ${res.status}`);
-      } else {
-        setErrors([]);
-      }
-    } catch (error) {
-      console.error('Fetch unsuccessful.', error);
-    }
-  
-    // this.props.registerUser(formData, this.props.history);
+    // setEmpty(isEmpty(formData));
+    dispatch(registerUser(formData));
+    // if (status == 'succeeded') navigate('/login');
   };
 
   return (
     <>
-
       <h1>Join Skedge</h1>
 
       <RegisterNotice 

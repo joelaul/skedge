@@ -1,7 +1,10 @@
-import React from 'react'
+import { React } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+
 import styled from 'styled-components'
 
-import { useSelector } from 'react-redux';
+import { logoutUser } from "../../../ctx/features/auth/authSlice";
 
 import { NAV_ITEMS } from './constants';
 import { classNames } from '../../../lib/css/classNames';
@@ -65,41 +68,51 @@ const StyledNav = styled.div`
 `
 
 const Nav = () => {
-  const {currentUser, error, status } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const pathname = location.pathname;
   const isCurrent = (href) => pathname == href;
 
-  const inState = (
-    <div className="nav-items">
-      {currentUser.toString()}
-    </div>
-  );
-
-  const outState = (
-    <div className="nav-items">
-      {NAV_ITEMS.map(({ title, href }) => (
-        <div 
-          key={title}
-          className={classNames('nav-item',
-              isCurrent(href) && 'current'
-          )}
-        >
-            <a href={href}>{title}</a>
-        </div>
-      ))}
-    </div>
-  );
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate('/');
+  }
 
   return (
     <>
       <StyledNav>
-        <div>
-          <a href="/">
+        <div> 
+          <a href={user ? 'dashboard' : '/'}>
             <img className="nav-logo" src={logo}/>
           </a>
         </div>
-        {'user is logged in' ? outState : inState}
+
+        {user ? 
+        (
+          <div className="nav-items">
+            <div className="nav-item">{user.name}</div>
+            <div className="nav-item">
+              <a onClick={handleLogout}>Logout</a>
+            </div>
+          </div>
+        ) : 
+        (
+          <div className="nav-items">
+            {NAV_ITEMS.map(({ title, href }) => (
+              <div 
+                key={title}
+                className={classNames('nav-item',
+                isCurrent(href) && 'current'
+                )}
+              >
+              <a href={href}>{title}</a>
+            </div>
+            ))}
+          </div>
+        )
+        }
       </StyledNav>
     </>
   )

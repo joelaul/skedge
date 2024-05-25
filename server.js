@@ -21,7 +21,7 @@ const connect = async () => {
 };
 connect();
 
-// MIDDLEWARE
+// CONFIG / MIDDLEWARE
 
 app.use(passport.initialize());
 require("./config/passport")(passport);

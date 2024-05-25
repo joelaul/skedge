@@ -5,10 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { FORM_ITEMS } from './constants';
-import { isEmpty } from '../../../lib/util/isEmpty'
-
 import { loginUser } from "../../../ctx/features/auth/authActions";
-
 import LoginNotice from './LoginNotice';
 
 // STYLES
@@ -46,10 +43,13 @@ const StyledLoginCard = styled.div`
 // COMPONENT
 
 const Login = () => {
-  const {currentUser, error, loading, status } = useSelector((state) => state.auth);
-
-  const navigate = useNavigate();
+  const { status } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (status == 'succeeded') navigate('/dashboard');
+  }, [status]);
 
   const [formData, setFormData] = useState(
     {
@@ -59,15 +59,6 @@ const Login = () => {
     }
   );
 
-  // TODO(joe): fix this, add setCurrentUser action
-  useEffect(() => {
-    if ('user is logged in') {
-      navigate('/profile');
-    }
-    console.log();
-  }, []);
-
-  // TODO(joe): implement globally with Redux
   const [errors, setErrors] = useState([]);
   const [empty, setEmpty] = useState(true);
 
@@ -84,8 +75,9 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    setEmpty(isEmpty(formData));
+    // setEmpty(isEmpty(formData));
     dispatch(loginUser(formData));
+    navigate('/dashboard');
   };
   
   return (
@@ -94,11 +86,13 @@ const Login = () => {
 
         <h1>Log in to your account</h1>
 
-        <LoginNotice 
-          errors={errors}
-          empty={empty}
-        >
-        </LoginNotice>
+        {(status == 'failed' || status == 'succeeded') &&
+          <LoginNotice 
+            errors={errors}
+            empty={empty}
+          >
+          </LoginNotice>
+        }
 
         <form noValidate>
         
