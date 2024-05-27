@@ -19,11 +19,11 @@ export const registerUser = createAsyncThunk(
 
       if (!res.ok) {
         console.error(`Request declined. HTTP status code: ${res.status}`);
-        console.log(data); // VALIDATOR { ERRORS }: pass this to Redux error state somehow.
+        return rejectWithValue(data);
       } else {
       }
     } catch (error) {
-      rejectWithValue(error);
+      return rejectWithValue(error);
     }
 });
 
@@ -43,7 +43,7 @@ export const loginUser = createAsyncThunk(
 
       if (!res.ok) {
         console.error(`Request declined. HTTP status code: ${res.status}`);    
-        console.log(data); // VALIDATOR { ERRORS }: pass this to Redux error state somehow.    
+        return rejectWithValue(data);   
       } else {
         const { token } = data;
         localStorage.setItem('jwt', token);
@@ -51,6 +51,6 @@ export const loginUser = createAsyncThunk(
         return decoded;
       }
     } catch (error) {
-      rejectWithValue(error);
+      return rejectWithValue(error);
     }
 });

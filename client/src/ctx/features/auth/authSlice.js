@@ -3,7 +3,7 @@ import { registerUser, loginUser } from './authActions';
 
 const initialState = {
     user: null,
-    error: {},
+    errors: {},
     loading: false,
     status: 'idle'
 }
@@ -17,7 +17,7 @@ const authSlice = createSlice({
     },
     logoutUser: (state) => {
       state.user = null,
-      state.error = {},
+      state.errors = {},
       state.loading = false,
       state.status = 'idle',
       localStorage.removeItem('jwt');
@@ -28,7 +28,7 @@ const authSlice = createSlice({
       .addCase(registerUser.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
-        state.error = {};
+        state.errors = {};
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
@@ -37,12 +37,12 @@ const authSlice = createSlice({
       .addCase(registerUser.rejected, (state, action) => {
         state.status = 'failed';
         state.loading = false;
-        state.error = action.payload;
+        state.errors = action.payload;
       })
       .addCase(loginUser.pending, (state) => {
         state.status = 'loading';
         state.loading = true;
-        state.error = {};
+        state.errors = {};
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
@@ -52,7 +52,7 @@ const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.status = 'failed';
         state.loading = false;
-        state.error = action.payload;
+        state.errors = action.payload;
       });
   }
 });

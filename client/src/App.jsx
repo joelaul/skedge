@@ -80,8 +80,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>
 )
 
-// TODO(joe): REPLICATE SANS-REDUX CONDITIONAL NOTICE RENDERING / ERROR HANDLING
-// TODO(joe): WRONG PASSWORD STILL CAUSES REDIRECT TO /dashboard
+/* TODO(joe):
+
+// Notice timeouts not working - misunderstanding of redux thunk states?
+// <LoginNotice />, <RegisterNotice /> ---> <Notice action={action} />
+
+*/
 
 /* NOTES
 
@@ -104,6 +108,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     Profile - ref->User, ref-Schedule, Partners (User[]), Chats (Chat[])
 
   THOUGHTS:
+
+    ASYNC THUNK STATES (3) TRIGGER COMPONENT RE-RENDERS...
 
     UI should conform to the shape of your data structures
 

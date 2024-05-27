@@ -30,6 +30,8 @@ const StyledHero = styled.div`
 
 const Landing = () => {
   const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState(
     {
       goals: "",
@@ -38,9 +40,7 @@ const Landing = () => {
       personality: ""
     }
   );
-
-  const navigate = useNavigate();
-
+  
   useEffect(() => {
     if (user) navigate('/dashboard');
   }, [user])

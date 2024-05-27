@@ -1,5 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+
 
 const StyledError = styled.div`
     margin: 10px auto;
@@ -21,21 +23,26 @@ const StyledSuccess = styled.div`
     border-radius: 3px;
 `
 
-const RegisterNotice = ({errors, empty}) => {
+const RegisterNotice = () => {
+    const { status, errors, loading } = useSelector((state) => state.auth);
+    const errorsValues = Object.values(errors);
   return (
     <>
-    {errors.length > 0
+    {status == 'failed'
     ?
-        errors.map((message, index) => (
+        errorsValues.map((value, index) => (
             <StyledError key={index}>
-                {message}
+                {value}
             </StyledError>
         ))
     :   
-        !empty && 
+    loading
+    ?
         <StyledSuccess>
             Account created!
         </StyledSuccess>
+    :
+        undefined
     }
     </>
   )

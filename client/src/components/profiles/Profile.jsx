@@ -5,7 +5,7 @@ const Profile = () => {
   const { user } = useSelector((state) => state.auth);
 
   return (
-    <div>{user.name}'s profile</div>
+    <div>{user && user.name}'s profile</div>
   )
 }
 

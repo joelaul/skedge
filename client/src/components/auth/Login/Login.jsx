@@ -43,13 +43,9 @@ const StyledLoginCard = styled.div`
 // COMPONENT
 
 const Login = () => {
-  const { status } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (status == 'succeeded') navigate('/dashboard');
-  }, [status]);
 
   const [formData, setFormData] = useState(
     {
@@ -59,9 +55,12 @@ const Login = () => {
     }
   );
 
-  const [errors, setErrors] = useState([]);
-  const [empty, setEmpty] = useState(true);
-
+  useEffect(() => {
+    if (user) {
+      setTimeout(() => {navigate('/dashboard'), 500});
+    }
+  }, [user]);
+  
   const handleChange = (e) => {
     setFormData(
       {
@@ -75,9 +74,7 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    // setEmpty(isEmpty(formData));
     dispatch(loginUser(formData));
-    navigate('/dashboard');
   };
   
   return (
@@ -86,13 +83,7 @@ const Login = () => {
 
         <h1>Log in to your account</h1>
 
-        {(status == 'failed' || status == 'succeeded') &&
-          <LoginNotice 
-            errors={errors}
-            empty={empty}
-          >
-          </LoginNotice>
-        }
+          <LoginNotice />
 
         <form noValidate>
         

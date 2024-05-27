@@ -4,15 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styled from 'styled-components';
 
-import { isEmpty } from '../../../lib/util/isEmpty';
-
 import { FORM_ITEMS } from './constants'
 import { registerUser } from "../../../ctx/features/auth/authActions";
 import RegisterNotice from './RegisterNotice';
 
 // STYLES
 
-const StyledRegister = styled.div``;
+const StyledRegister = styled.div`
+`;
 
 // COMPONENT
 
@@ -21,11 +20,6 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (status == 'succeeded')
-    navigate('/dashboard');
-  }, [status]);
-
   const [formData, setFormData] = useState(
     {
       name: "",
@@ -33,8 +27,10 @@ const Register = () => {
       password: ""
     }
   );
-  const [empty, setEmpty] = useState(true);
-  const [errors, setErrors] = useState([]);
+  
+  useEffect(() => {
+    if (status == 'succeeded') setTimeout(() => navigate('/login'), 500);
+  });
 
   const handleChange = (e) => {
     setFormData(
@@ -44,26 +40,19 @@ const Register = () => {
       }
     );
   };
-  
   const handleKeyPress = (e) =>    {
     if (e.key == 'Enter') handleRegister();
   };
   
   const handleRegister = async () => {
-    // setEmpty(isEmpty(formData));
     dispatch(registerUser(formData));
-    // if (status == 'succeeded') navigate('/login');
   };
 
   return (
     <>
       <h1>Join Skedge</h1>
 
-      <RegisterNotice 
-        errors={errors}
-        empty={empty}
-      >
-      </RegisterNotice>
+      <RegisterNotice />
 
       <form noValidate>
       
