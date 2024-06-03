@@ -5,19 +5,17 @@ on:
       - master
 
 jobs:
-  premerge:
-    name: premerge
+  ci:
+    name: ci
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install Dependencies
-        run: yarn install
-      - name: Compile
-        run: yarn tsc --noEmit
+        run: yarn
       - name: Lint
         run: yarn lint
       - name: Check Format
         run: yarn prettier . --check
       - name: Build
-        run: yarn build
+        run: yarn prod

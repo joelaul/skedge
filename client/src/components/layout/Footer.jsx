@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
 // STYLES
 
@@ -8,8 +8,8 @@ const StyledFooter = styled.div`
   bottom: 0;
   width: 100vw;
   font-size: 0.7em;
-  color: #DDD;
-  background: #00CC88;
+  color: #ddd;
+  background: #00cc88;
 
   a {
     color: #ddd;
@@ -20,14 +20,17 @@ const StyledFooter = styled.div`
       color: white;
     }
   }
-`
+`;
 
 const Footer = () => {
   return (
     <StyledFooter>
-      Copyright &copy; {new Date().getFullYear()} <a href="https://joelaul.dev" target="_blank">Joe Lauletta</a>
+      Copyright &copy; {new Date().getFullYear()}{" "}
+      <a href="https://joelaul.dev" target="_blank">
+        Joe Lauletta
+      </a>
     </StyledFooter>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

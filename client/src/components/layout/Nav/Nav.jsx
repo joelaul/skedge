@@ -1,15 +1,15 @@
-import { React } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
+import { React } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import styled from 'styled-components'
+import styled from "styled-components";
 
 import { logoutUser } from "../../../ctx/features/auth/authSlice";
 
-import { NAV_ITEMS } from './constants';
-import { classNames } from '../../../lib/css/classNames';
+import { NAV_ITEMS } from "./constants";
+import { classNames } from "../../../lib/css/classNames";
 
-import logo from '../../../assets/img/logo.png';
+import logo from "../../../assets/img/logo.png";
 
 // STYLES
 
@@ -33,9 +33,9 @@ const StyledNav = styled.div`
   }
 
   img {
-      cursor: pointer;
+    cursor: pointer;
   }
-  
+
   .nav-logo {
     display: absolute;
     height: 40px;
@@ -43,11 +43,11 @@ const StyledNav = styled.div`
     left: 50px;
     // border-radius: 50%;
 
-      a {
-        &:active {
-          border: 10px solid #000;
-        }
+    a {
+      &:active {
+        border: 10px solid #000;
       }
+    }
   }
 
   .nav-items {
@@ -57,15 +57,14 @@ const StyledNav = styled.div`
     .nav-item {
       padding: 0 10px 0 5px;
     }
-  
   }
   .current > a {
     padding: 5px;
     color: white;
     background: #00a36d;
-    border-radius: 5px; 
+    border-radius: 5px;
   }
-`
+`;
 
 const Nav = () => {
   const { user } = useSelector((state) => state.auth);
@@ -77,45 +76,40 @@ const Nav = () => {
 
   const handleLogout = () => {
     dispatch(logoutUser());
-    navigate('/');
-  }
+    navigate("/");
+  };
 
   return (
     <>
       <StyledNav>
-        <div> 
-          <a href={user ? 'dashboard' : '/'}>
-            <img className="nav-logo" src={logo}/>
+        <div>
+          <a href={user ? "dashboard" : "/"}>
+            <img className="nav-logo" src={logo} />
           </a>
         </div>
 
-        {user ? 
-        (
+        {user ? (
           <div className="nav-items">
             <div className="nav-item">{user.name}</div>
             <div className="nav-item">
               <a onClick={handleLogout}>Logout</a>
             </div>
           </div>
-        ) : 
-        (
+        ) : (
           <div className="nav-items">
             {NAV_ITEMS.map(({ title, href }) => (
-              <div 
+              <div
                 key={title}
-                className={classNames('nav-item',
-                isCurrent(href) && 'current'
-                )}
+                className={classNames("nav-item", isCurrent(href) && "current")}
               >
-              <a href={href}>{title}</a>
-            </div>
+                <a href={href}>{title}</a>
+              </div>
             ))}
           </div>
-        )
-        }
+        )}
       </StyledNav>
     </>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;

@@ -3,7 +3,6 @@ const router = express.Router();
 
 const Match = require("../models/Match");
 
-router
-  .route("/")
+router.route("/");
 
 module.exports = router;

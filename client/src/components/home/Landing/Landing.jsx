@@ -1,13 +1,13 @@
-import { React, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { React, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import { FORM_TOP_ITEMS } from './constants';
-import { clientUrl, serverUrl } from '../../../constants';
+import { FORM_TOP_ITEMS } from "./constants";
+import { clientUrl, serverUrl } from "../../../constants";
 
-import cameron from '../../../assets/img/cameron.png'
+import cameron from "../../../assets/img/cameron.png";
 
 // STYLES
 
@@ -23,7 +23,7 @@ const StyledHero = styled.div`
     max-width: 500px;
 
     span {
-      color: #DDD
+      color: #ddd;
     }
   }
 `;
@@ -32,40 +32,34 @@ const Landing = () => {
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState(
-    {
-      goals: "",
-      timeConstraints: "",
-      workStyle: "",
-      personality: ""
-    }
-  );
-  
+  const [formData, setFormData] = useState({
+    goals: "",
+    timeConstraints: "",
+    workStyle: "",
+    personality: "",
+  });
+
   useEffect(() => {
-    if (user) navigate('/dashboard');
-  }, [user])
+    if (user) navigate("/dashboard");
+  }, [user]);
 
   const handleChange = (e) => {
-    setFormData(
-      {
-        ...formData, 
-        [e.target.name]: e.target.value 
-      }
-    );
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
-  
+
   const handleGenerate = async () => {
     console.log(formData);
 
-    const res = await fetch(serverUrl, 
-    { 
-      method: "POST", 
+    const res = await fetch(serverUrl, {
+      method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-        body: JSON.stringify(formData)
+      body: JSON.stringify(formData),
     });
-
   };
 
   return (
@@ -77,30 +71,24 @@ const Landing = () => {
 
         <div className="cameron">
           <a href={clientUrl}>
-            <img src={cameron} className="cameron"/>
+            <img src={cameron} className="cameron" />
           </a>
         </div>
       </StyledHero>
 
       <form noValidate>
-
         <div className="form top">
-
           {FORM_TOP_ITEMS.map(({ title, camel, placeholder }) => (
-            <div 
-              key={camel}
-            >
-                <label>{`${title}: ` }</label>
-                <input
-                  name={camel}
-                  placeholder={placeholder}
-                  value={formData[`${camel}`]}
-                  onChange={handleChange}
-                >
-                </input>
+            <div key={camel}>
+              <label>{`${title}: `}</label>
+              <input
+                name={camel}
+                placeholder={placeholder}
+                value={formData[`${camel}`]}
+                onChange={handleChange}
+              ></input>
             </div>
           ))}
-          
         </div>
 
         <div className="form bottom">
@@ -109,22 +97,15 @@ const Landing = () => {
           <label> Password: </label>
           <input type="password"></input>
         </div>
-
       </form>
 
       <div className="cta">
+        <button onClick={handleGenerate}>🚀 Get Started</button>
 
-          <button onClick={handleGenerate}>
-            🚀 Get Started
-          </button>
-
-          <p> 
-            Click above to generate your schedule and find a Skedge partner!
-          </p>
-
+        <p>Click above to generate your schedule and find a Skedge partner!</p>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Landing
+export default Landing;

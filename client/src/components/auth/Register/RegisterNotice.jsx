@@ -1,51 +1,41 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-
+import React from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
 
 const StyledError = styled.div`
-    margin: 10px auto;
-    padding: 3px;
-    width: 300px;
+  margin: 10px auto;
+  padding: 3px;
+  width: 300px;
 
-    background: firebrick;
-    font-size: 0.8em;
-    border-radius: 3px;
-`
+  background: firebrick;
+  font-size: 0.8em;
+  border-radius: 3px;
+`;
 
 const StyledSuccess = styled.div`
-    margin: 10px auto;
-    padding: 3px;
-    width: 300px;
+  margin: 10px auto;
+  padding: 3px;
+  width: 300px;
 
-    background: darkgreen;
-    font-size: 0.8em;
-    border-radius: 3px;
-`
+  background: darkgreen;
+  font-size: 0.8em;
+  border-radius: 3px;
+`;
 
 const RegisterNotice = () => {
-    const { status, errors, loading } = useSelector((state) => state.auth);
-    const errorsValues = Object.values(errors);
+  const { status, errors, loading } = useSelector((state) => state.auth);
+  const errorsValues = Object.values(errors);
   return (
     <>
-    {status == 'failed'
-    ?
+      {status == "failed" ? (
         errorsValues.map((value, index) => (
-            <StyledError key={index}>
-                {value}
-            </StyledError>
+          <StyledError key={index}>{value}</StyledError>
         ))
-    :   
-    loading
-    ?
-        <StyledSuccess>
-            Account created!
-        </StyledSuccess>
-    :
-        undefined
-    }
+      ) : loading ? (
+        <StyledSuccess>Account created!</StyledSuccess>
+      ) : undefined}
     </>
-  )
-}
+  );
+};
 
-export default RegisterNotice
+export default RegisterNotice;

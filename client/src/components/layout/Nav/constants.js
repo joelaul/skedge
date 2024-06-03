@@ -1,18 +1,18 @@
 export const NAV_ITEMS = [
-  { 
-    title: 'Explore', 
-    href: '/explore' 
+  {
+    title: "Explore",
+    href: "/explore",
   },
-  { 
-    title: 'Blog', 
-    href: '/blog' 
+  {
+    title: "Blog",
+    href: "/blog",
   },
-  { 
-    title: 'Login', 
-    href: '/login' 
+  {
+    title: "Login",
+    href: "/login",
   },
-  { 
-    title: 'Register', 
-    href: '/register' 
+  {
+    title: "Register",
+    href: "/register",
   },
 ];

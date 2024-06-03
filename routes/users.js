@@ -40,7 +40,7 @@ router.post("/register", async (req, res) => {
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
     });
     const salt = await bcrypt.genSalt(10);
     newUser.password = await bcrypt.hash(newUser.password, salt);
@@ -50,7 +50,7 @@ router.post("/register", async (req, res) => {
     res.json(savedUser);
   } catch (err) {
     // Handle server-side error
-      return res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: "Internal server error" });
   }
 });
 
@@ -97,7 +97,8 @@ router.post("/login", async (req, res) => {
 });
 
 // Check current user based on JWT
-router.get("/me",
+router.get(
+  "/me",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     res.json({
@@ -105,7 +106,7 @@ router.get("/me",
       name: req.user.name,
       email: req.user.email,
     });
-  }
-); 
+  },
+);
 
 module.exports = router;

@@ -1,12 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
-
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider, useDispatch } from "react-redux";
-import { store } from './ctx/store';
+import { store } from "./ctx/store";
 
-import { setCurrentUser } from './ctx/features/auth/authSlice'
+import { jwtDecode } from "jwt-decode";
+import { setCurrentUser } from "./ctx/features/auth/authSlice";
 
 // STYLES
 
@@ -27,8 +26,8 @@ import Register from "./components/auth/Register/Register";
 import Login from "./components/auth/Login/Login";
 
 // Matches
-import Board from "./components/matches/Board"
-import Chat from "./components/matches/Chat"
+import Board from "./components/matches/Board";
+import Chat from "./components/matches/Chat";
 
 // Profiles
 import Profile from "./components/profiles/Profile";
@@ -36,9 +35,9 @@ import ProfileEdit from "./components/profiles/ProfileEdit";
 import Explore from "./components/profiles/Explore";
 
 // Org
-import Blog from "./components/org/Blog"
-import Terms from "./components/org/Terms"
-import Privacy from "./components/org/Privacy"
+import Blog from "./components/org/Blog";
+import Terms from "./components/org/Terms";
+import Privacy from "./components/org/Privacy";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -69,21 +68,25 @@ const App = () => {
         <Footer />
       </Router>
     </>
-  )
-}
+  );
+};
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
-    </ Provider>
-  </React.StrictMode>
-)
+    </Provider>
+  </React.StrictMode>,
+);
 
 /* TODO(joe):
 
 // Notice timeouts not working - misunderstanding of redux thunk states?
-// <LoginNotice />, <RegisterNotice /> ---> <Notice action={action} />
+
+// <LoginNotice />, <RegisterNotice /> --?--> <Notice />
+// Apply Login UI to Register
+// profiles layer - Profile, ProfileEdit, Explore, Nav updates
+// Protected routes?
 
 */
 

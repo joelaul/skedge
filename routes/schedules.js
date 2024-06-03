@@ -3,7 +3,6 @@ const router = express.Router();
 
 const Schedule = require("../models/Schedule");
 
-router
-  .route("/")
+router.route("/");
 
 module.exports = router;

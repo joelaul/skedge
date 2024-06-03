@@ -5,7 +5,7 @@ const ScheduleSchema = new Schema({
   id: {
     type: Number,
     required: true,
-  }
+  },
 });
 
 module.exports = mongoose.model("Schedule", ScheduleSchema);

@@ -12,6 +12,7 @@ const Profile = require("../models/Profile");
 
 // ROUTES
 
+// Test
 router.get("/test", (req, res) => res.json({ msg: "Profile route works" }));
 
 // Get the profile of the current logged-in user
@@ -21,7 +22,7 @@ router.get(
   async (req, res) => {
     try {
       const profile = await Profile.findOne({ user: req.user.id }).populate(
-        "user"
+        "user",
       );
 
       if (!profile) {
@@ -32,7 +33,7 @@ router.get(
     } catch (err) {
       return res.status(404).json(err);
     }
-  }
+  },
 );
 
 // Create new or update existing profile
@@ -75,7 +76,7 @@ router.post(
           {
             new: true,
             useFindAndModify: false,
-          }
+          },
         );
         res.json(updatedProfile);
       } else {
@@ -96,7 +97,7 @@ router.post(
     } catch (err) {
       console.log(err);
     }
-  }
+  },
 );
 
 // Get a profile by user id
@@ -126,7 +127,7 @@ router.delete(
     } catch (err) {
       console.log(err);
     }
-  }
+  },
 );
 
 module.exports = router;

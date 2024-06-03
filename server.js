@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const cors = require("cors")
+const cors = require("cors");
 
 const mongoose = require("mongoose");
 const passport = require("passport");
@@ -38,7 +38,7 @@ app.get("/test", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
 });
 
 app.use("/chats", require("./routes/chats"));
@@ -54,7 +54,5 @@ const port = process.env.PORT || 8000;
 mongoose.connection.once("open", () => {
   console.clear();
   console.log("Connected to MongoDB");
-  app.listen(port, () =>
-    console.log(`Server running on port ${port}`)
-  );
+  app.listen(port, () => console.log(`Server running on port ${port}`));
 });

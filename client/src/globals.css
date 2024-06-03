@@ -35,7 +35,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background: #00CC88;
+  background: #00cc88;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -50,7 +50,7 @@ button:focus-visible {
 h1 {
   font-size: 3em;
   line-height: 1.1;
-  color: #00CC88
+  color: #00cc88;
 }
 
 input {

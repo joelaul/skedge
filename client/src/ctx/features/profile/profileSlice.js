@@ -1,20 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const isEmpty = (data) => {
-    return (
-        Object.keys(data).length === 0
-    )
+  return Object.keys(data).length === 0;
 };
 
 const initialState = {
-  errors: {}
-}
+  errors: {},
+};
 
 const errorSlice = createSlice({
-  name: 'profile',
+  name: "profile",
   initialState,
-  reducers: {
-  }
-})
+  reducers: {},
+});
 
-export default errorSlice.reducer
+export default errorSlice.reducer;

@@ -3,7 +3,6 @@ const router = express.Router();
 
 const Chat = require("../models/Chat");
 
-router
-  .route("/")
+router.route("/");
 
 module.exports = router;
