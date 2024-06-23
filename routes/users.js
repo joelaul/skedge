@@ -72,7 +72,6 @@ router.post("/login", async (req, res) => {
       let isMatch = await bcrypt.compare(password, user.password);
 
       if (isMatch) {
-        // user.id?
         const payload = {
           id: user.id,
           name: user.name,

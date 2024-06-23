@@ -59,7 +59,7 @@ const Login = () => {
         navigate("/dashboard"), 500;
       });
     }
-  }, [user]);
+  }, [user, navigate]);
 
   const handleChange = (e) => {
     setFormData({

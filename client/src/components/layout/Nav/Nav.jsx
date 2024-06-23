@@ -90,7 +90,9 @@ const Nav = () => {
 
         {user ? (
           <div className="nav-items">
-            <div className="nav-item">{user.name}</div>
+            <div className="nav-item">
+              <a onClick={navigate("/profile")}>{user.name}</a>
+            </div>
             <div className="nav-item">
               <a onClick={handleLogout}>Logout</a>
             </div>
